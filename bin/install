@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#var
+declare version=$2
+
+#main
+#(1) prepare
+client_debug "Preparing environment to install..."
+mkdir -p $OPENSHIFT_MONGODB_HOME_DIR
+mkdir -p $OPENSHIFT_MONGODB_CONF_DIR
+mkdir -p $OPENSHIFT_MONGODB_DATA_DIR
+mkdir -p $OPENSHIFT_MONGODB_LOG_DIR
+
+#(2) install
+client_debug "Installing MongoDB on ${OPENSHIFT_MONGODB_HOME_DIR}..."
+cd $OPENSHIFT_MONGODB_HOME_DIR/versions
+tar -zxvf mongodb-linux-x86_64-${version}.tgz
+rm mongodb-linux-*.tgz
+mv mongodb-linux-* ../software
+
+#(3) configure
+client_debug 'Configuring MongoDB...'
+cp $OPENSHIFT_MONGODB_HOME_DIR/conf/mongod.yml $OPENSHIFT_MONGODB_CONF_DIR/mongod.yml
+
+#(4) end
+client_result "MongoDB $version installed."

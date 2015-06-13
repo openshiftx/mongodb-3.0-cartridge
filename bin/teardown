@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#main
+client_debug "Removing log files..."
+rm -rf $OPENSHIFT_MONGODB_LOG_DIR
+
+client_debug "Removing data directory..."
+rm -rf $OPENSHIFT_MONGODB_DATA_DIR
+
+client_debug "Removing configuration directory..."
+rm -rf $OPENSHIFT_MONGODB_CONF_DIR
+
+client_debug "Removing persistent directory..."
+rm -rf $OPENSHIFT_DATA_DIR/mongodb

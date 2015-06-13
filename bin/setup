@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#vars
+readonly version=$2
+readonly url="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${version}.tgz"
+
+#main
+client_debug "Downloading MongoDB from ${url}..."
+mkdir -p $OPENSHIFT_MONGODB_HOME_DIR/versions
+curl -L $url -o $OPENSHIFT_MONGODB_HOME_DIR/versions/mongodb-linux-x86_64-${version}.tgz

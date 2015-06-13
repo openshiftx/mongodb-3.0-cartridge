@@ -1,0 +1,24 @@
+systemLog:
+  quiet: true
+  destination: file
+  path: <%= ENV['OPENSHIFT_MONGODB_LOG_DIR'] %>/mongod.log
+  logAppend: false
+  logRotate: rename
+  timeStampFormat: iso8601-utc
+  verbosity: 0
+storage:
+  journal:
+    enabled: true
+  dbPath: <%= ENV['OPENSHIFT_MONGODB_DATA_DIR'] %>
+  directoryPerDB: true
+  syncPeriodSecs: 60
+  engine: wiredTiger
+processManagement:
+  fork: true
+  pidFilePath: <%= ENV['OPENSHIFT_MONGODB_LOG_DIR'] %>/mongod.pid
+net:
+  http:
+    enabled: false
+  maxIncomingConnections: 100
+security:
+  authorization: disabled

@@ -1,0 +1,71 @@
+---
+Name: mongodb
+Display-Name: MongoDB 3.0
+Cartridge-Short-Name: MONGODB
+Cartridge-Vendor: openshiftx
+Vendor: MongoDB, Inc.
+Website: http://www.mongodb.org
+Description: MongoDB 3.0 cartridge.
+Cartridge-Version: 0.1.0
+License: MongoDB License
+License-Url: http://www.mongodb.org/about/licensing
+Version: '3.0.3'
+Categories:
+  - service
+  - database
+  - nosql
+  - mongodb
+  - embedded
+Provides:
+  - mongodb
+  - mongodb-3.0
+Scaling:
+  Min: 1
+  Max: 1
+Endpoints:
+  - Private-IP-Name: IP
+    Private-Port-Name: PORT
+    Private-Port: 27017
+    Public-Port-Name: PROXY_PORT
+    Protocols:
+      - mongodb
+Cart-Data:
+  - Key: OPENSHIFT_MONGODB_HOME_DIR
+    Type: environment
+    Description: "MongoDB home directory."
+  - Key: OPENSHIFT_MONGODB_DIR
+    Type: environment
+    Description: "MongoDB home direcory."
+  - Key: OPENSHIFT_MONGODB_DATA_DIR
+    Type: environment
+    Description: "MongoDB data directory."
+  - Key: OPENSHIFT_MONGODB_BIN_DIR
+    Type: environment
+    Description: "MongoDB binary directory."
+  - Key: OPENSHIFT_MONGODB_CONF_DIR
+    Type: environment
+    Description: "MongoDB configuration directory."
+  - Key: OPENSHIFT_MONGODB_DB_LOG_DIR
+    Type: environment
+    Description: "MongoDB log directory."
+  - Key: OPENSHIFT_MONGODB_IP
+    Type: environment
+    Description: "MongoDB instance IP."
+  - Key: OPENSHIFT_MONGODB_DB_HOST
+    Type: environment
+    Description: "MongoDB instance IP."
+  - Key: OPENSHIFT_MONGODB_PORT
+    Type: environment
+    Description: "MongoDB instance port."
+  - Key: OPENSHIFT_MONGODB_DB_PORT
+    Type: environment
+    Description: "MongoDB instance port."
+  - Key: OPENSHIFT_MONGODB_URL
+    Type: environment
+    Description: "MongoDB instance URL."
+  - Key: OPENSHIFT_MONGODB_DB_URL
+    Type: environment
+    Description: "MongoDB instance URL."
+Publishes:
+  publish-nosql-db-connection-info:
+    Type: ENV:NET_TCP:nosqldb:connection-info

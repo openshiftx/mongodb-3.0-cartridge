@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#main
+client_debug "Removing temporary files..."
+rm -rf $OPENSHIFT_MONGODB_HOME_DIR/conf
+rm -rf $OPENSHIFT_MONGODB_HOME_DIR/versions

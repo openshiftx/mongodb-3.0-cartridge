@@ -1,0 +1,94 @@
+#!/bin/bash -e
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#vars
+declare action=$1
+
+#functions
+function running() {
+  ps -ef | grep 'bin/mongod' | grep -v grep
+}
+
+function start() {
+  local SLEEP='10s'
+  local MAX_ATTEMPTS=6
+  local -i i=0
+
+  #(1) start
+  if ! running; then
+    $OPENSHIFT_MONGODB_BIN_DIR/mongod \
+      --config $OPENSHIFT_MONGODB_CONF_DIR/mongod.yml \
+      --bind_ip $OPENSHIFT_MONGODB_IP \
+      --port $OPENSHIFT_MONGODB_PORT &
+
+    while ! running && [ $i -lt $MAX_ATTEMPTS ]; do
+      sleep $SLEEP
+      i=$((i+1))
+    done
+  fi
+
+  #(2) check
+  if running; then
+    client_result 'MongoDB instance started.'
+  else
+    client_error 'MongoDB instance couldn''t be started.'
+    exit 1
+  fi
+}
+
+function stop() {
+  local SLEEP='10s'
+  local MAX_ATTEMPTS=6
+  local -i i=0
+
+  #(1) stop
+  if running; then
+    if [ $OPENSHIFT_MONGODB_IP ]; then
+      $OPENSHIFT_MONGODB_BIN_DIR/mongo $OPENSHIFT_MONGODB_IP:$OPENSHIFT_MONGODB_PORT/admin --eval "db.shutdownServer()"
+    else
+      kill `ps -ef | grep /bin/mongod | grep -v grep | awk '{print $2}'`
+    fi
+
+    while running && [ $i -lt $MAX_ATTEMPTS ]; do
+      sleep $SLEEP
+      i=$((i+1))
+    done
+  fi
+
+  #(2) check
+  if running; then
+    client_error 'MongoDB instance couldn''t be stopped.'
+    exit 1
+  else
+    client_result 'MongoDB instance stopped.'
+    exit 0
+  fi
+}
+
+function restart() {
+  stop
+  start
+}
+
+function status() {
+  if running; then
+    client_result 'MongoDB instance is running.'
+  else
+    client_result 'MongoDB instance is stopped.'
+  fi
+}
+
+function tidy() {
+  rm $OPENSHIFT_MONGODB_LOG_DIR/mongod.log.*
+}
+
+#main
+case $action in
+  start) start;;
+  stop) stop;;
+  restart) restart;;
+  status) status;;
+  tidy) tidy;;
+esac
