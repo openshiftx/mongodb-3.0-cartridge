@@ -9,7 +9,7 @@ Description: MongoDB 3.0 cartridge.
 Cartridge-Version: 0.1.0
 License: MongoDB License
 License-Url: http://www.mongodb.org/about/licensing
-Version: '3.0.3'
+Version: '3.0.4'
 Categories:
   - service
   - database

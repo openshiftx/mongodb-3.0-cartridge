@@ -1,7 +1,7 @@
 # mongodb-3.0-cartridge
 
 Cartridge for installing MongoDB 3.0.
-Right now, the cartridge installs **MongoDB 3.0.3**.
+Right now, the cartridge installs **MongoDB 3.0.4**.
 
 ## Install
 
