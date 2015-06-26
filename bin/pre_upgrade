@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#main
+if [ $OPENSHIFT_MONGODB_HOME_DIR/software ]; then
+  client_debug "Removing software directory..."
+  rm -rf $OPENSHIFT_MONGODB_HOME_DIR/software
+fi

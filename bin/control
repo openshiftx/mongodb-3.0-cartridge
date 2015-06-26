@@ -19,7 +19,7 @@ function start() {
   #(1) start
   if ! running; then
     $OPENSHIFT_MONGODB_BIN_DIR/mongod \
-      --config $OPENSHIFT_MONGODB_CONF_DIR/mongod.yml \
+      --config $OPENSHIFT_MONGODB_CONF_DIR/mongod.conf \
       --bind_ip $OPENSHIFT_MONGODB_IP \
       --port $OPENSHIFT_MONGODB_PORT &
 
@@ -33,7 +33,7 @@ function start() {
   if running; then
     client_result 'MongoDB instance started.'
   else
-    client_error 'MongoDB instance couldn''t be started.'
+    client_error 'MongoDB instance could not be started.'
     exit 1
   fi
 }

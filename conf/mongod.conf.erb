@@ -3,7 +3,6 @@ systemLog:
   destination: file
   path: <%= ENV['OPENSHIFT_MONGODB_LOG_DIR'] %>/mongod.log
   logAppend: false
-  logRotate: rename
   timeStampFormat: iso8601-utc
   verbosity: 0
 storage:
@@ -12,7 +11,7 @@ storage:
   dbPath: <%= ENV['OPENSHIFT_MONGODB_DATA_DIR'] %>
   directoryPerDB: true
   syncPeriodSecs: 60
-  engine: wiredTiger
+  engine: mmapv1
 processManagement:
   fork: true
   pidFilePath: <%= ENV['OPENSHIFT_MONGODB_LOG_DIR'] %>/mongod.pid

@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+#imports
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source $OPENSHIFT_MONGODB_HOME_DIR/lib/install.sh
+
+#var
+declare version=$2
+
+#main
+install $version
+client_result "MongoDB upgraded to $version."

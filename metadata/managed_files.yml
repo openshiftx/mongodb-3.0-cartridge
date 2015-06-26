@@ -2,13 +2,11 @@
 locked_files:
   - bin/
   - bin/*
-  - env/
-  - env/*
   - metadata/
   - metadata/*
   - hooks/
   - hooks/*
 setup_rewritten:
-  - versions
+  - versions/
 processed_templates:
   - 'conf/*.erb'

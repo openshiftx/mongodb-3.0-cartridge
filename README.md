@@ -20,6 +20,21 @@ In the application page:
 1. Open a shell console.
 2. `rhc cartridge add http://cartreflect-claytondev.rhcloud.com/github/openshiftx/mongodb-3.0-cartridge -a YOUR_APP`
 
+## Upgrade
+
+In OpenShift Online, to upgrade the current version:
+
+1. Stop the cartridge: `rhc cartridge stop mongodb-3.0 -a YOUR_APP`.
+2. Show the cartridge status: `rhc cartridge status mongodb-3.0 -a YOUR_APP`.
+3. Connect to the gear: `rhc ssh YOUR_APP`.
+4. Run `mongodb/bin/setup -v newVersion`.
+5. Run `mongodb/bin/pre_upgrade`.
+6. Run `mongodb/bin/upgrade -v newVersion`.
+7. Run `mongodb/bin/post_upgrade`.
+8. Exit ssh connection: `exit`.
+9. Start the cartridge: `rhc cartridge start mongodb-3.0 -a YOUR_APP`.
+10. Show the cartridge status: `rhc cartridge status mongodb-3.0 -a YOUR_APP`.
+
 ## Remove
 
 1. Open a shell console.
