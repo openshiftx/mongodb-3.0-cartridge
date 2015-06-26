@@ -37,9 +37,11 @@ In the application page:
 - `OPENSHIFT_MONGODB_IP` and `OPENSHIFT_MONGODB_DB_HOST`. Server IP.
 - `OPENSHIFT_MONGODB_PORT` and `OPENSHIFT_MONGODB_DB_PORT`. Server port.
 - `OPENSHIFT_MONGODB_URL` and `OPENSHIFT_MONGODB_DB_URL`. URL for connecting to the instance.
+- `OPENSHIFT_MONGODB_VERSION`. Installed version.
 
 ## Best practices
 
-- Use the `mongod.yml` file located in `$OPENSHIFT_MONGODB_CONF_DIR`. Update it if needed, but use this file.
+- Use the `mongod.conf` file located in `$OPENSHIFT_MONGODB_CONF_DIR`. Update it if needed, but use this file.
+  - Don't set the configuration settings: `net.port` and `net.bindIp`.
 - Use the data directory located in `$OPENSHIFT_MONGODB_DATA_DIR`.
 - Use the log directory located in `$OPENSHIFT_MONGODB_LOG_DIR`.

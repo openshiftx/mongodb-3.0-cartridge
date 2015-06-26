@@ -19,6 +19,7 @@ Categories:
 Provides:
   - mongodb
   - mongodb-3.0
+Install-Build-Required: false
 Scaling:
   Min: 1
   Max: 1
